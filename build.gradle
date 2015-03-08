@@ -1,0 +1,74 @@
+buildscript {
+    repositories {
+        maven { url "https://repo.spring.io/libs-release" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.1.RELEASE")
+    }
+}
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+version = '0.1'
+
+eclipse {
+    classpath {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.2.1'
+}
+
+task initSourceFolders { // add << before { to prevent executing during configuration phase
+   sourceSets*.java.srcDirs*.each { it.mkdirs() }
+   sourceSets*.groovy.srcDirs*.each { it.mkdirs() }
+   sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}
+
+jar {
+    baseName = 'groovy-wordpress-rpc-lib'
+    manifest {
+        attributes 'Implementation-Title': 'groovy-wordpress-rpc-lib', 'Implementation-Version': version, 'Main-Class': 'by.novostroyka.usage.Main'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.3.9'
+    compile 'org.apache.xmlrpc:xmlrpc-client:3.1.3'
+    compile 'mysql:mysql-connector-java:5.1.34'
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.springframework:spring-core'
+    compile 'org.springframework:spring-context'
+    testCompile 'junit:junit:4.11'
+    testCompile 'org.springframework:spring-test'
+}
+/*
+bootRepackage {
+    mainClass = 'by.novostroyka.usage.Main'
+}
+
+springBoot {
+    mainClass = 'by.novostroyka.usage.Main'
+}
+*/
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
