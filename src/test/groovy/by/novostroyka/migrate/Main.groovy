@@ -1,6 +1,7 @@
 package by.novostroyka.migrate
 
 import org.springframework.boot.SpringApplication
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext
 
 import wordpress.Post
@@ -10,6 +11,7 @@ import wordpress.PostsService
 import wordpress.UploadData
 import wordpress.WordpressServiceFactory
 
+@SpringBootApplication
 class Main {
     
     final static String SQL = '''

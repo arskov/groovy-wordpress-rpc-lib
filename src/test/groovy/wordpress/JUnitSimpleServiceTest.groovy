@@ -2,6 +2,7 @@ package wordpress;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -10,6 +11,7 @@ import org.junit.Test;
  * @author Arseny Kovalchuk
  *
  */
+@Ignore
 class JUnitSimpleServiceTest extends Assert {
     
     static String URL         = "http://wp-novostroyka.by.local/xmlrpc.php"
